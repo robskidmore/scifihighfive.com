@@ -10,6 +10,7 @@ type Props = {
   rotation: number;
   size: "hero" | "small";
   priority?: boolean;
+  className?: string;
 };
 
 const flavorToken: Record<ThumbnailFlavor, string> = {
@@ -26,6 +27,7 @@ export function EpisodeThumbnail({
   rotation,
   size,
   priority = false,
+  className = "",
 }: Props) {
   const dimensions =
     size === "hero"
@@ -42,9 +44,14 @@ export function EpisodeThumbnail({
     ["--duotone-color" as string]: flavorToken[flavor],
   };
 
+  const sizeClass =
+    size === "hero"
+      ? "max-w-[680px] rounded-[14px]"
+      : "max-w-[320px] rounded-lg";
+
   return (
     <figure
-      className={`thumb-duotone thumb-${size}`}
+      className={`thumb-duotone w-full aspect-video m-0 ${sizeClass} ${className}`}
       style={wrapperStyle}
     >
       <Image
@@ -58,7 +65,7 @@ export function EpisodeThumbnail({
             : "(max-width: 768px) 100vw, 200px"
         }
         priority={priority}
-        className="thumb-image"
+        className="block w-full h-full object-cover"
       />
     </figure>
   );

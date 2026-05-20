@@ -44,7 +44,7 @@ export function NewsletterForm({
       </span>
 
       {status === "sent" ? (
-        <p className="t-meta text-ink">
+        <p className="font-mono text-base uppercase tracking-[0.06em] leading-[1.4] text-ink">
           <span className="text-accent" aria-hidden="true">●</span> {sentText}
         </p>
       ) : (
@@ -55,8 +55,7 @@ export function NewsletterForm({
         >
           <label
             htmlFor={inputId}
-            className="t-label-italic text-ink-soft"
-            style={{ marginBottom: "2px" }}
+            className="font-body italic font-normal text-[17px] leading-[1.4] text-ink-soft mb-0.5"
           >
             Your email
           </label>
@@ -69,14 +68,13 @@ export function NewsletterForm({
               placeholder="you@somewhere.net"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="email-input flex-1"
-              style={{ minWidth: "200px" }}
+              className="flex-1 min-w-[200px] bg-transparent border-0 border-b border-accent text-ink font-body text-[19px] py-1.5 px-0 outline-none placeholder:text-ink-faint placeholder:italic focus:border-b-2 focus:border-accent-bright focus:pb-[5px]"
               autoComplete="email"
               disabled={status === "submitting"}
             />
             <button
               type="submit"
-              className="transmit-button"
+              className="bg-transparent border-0 text-accent font-mono text-base tracking-[0.14em] uppercase cursor-pointer px-2 py-3.5 -m-2 min-h-[44px] inline-flex items-center transition-colors duration-200 ease-[var(--ease-out-quart)] hover:text-accent-bright disabled:text-ink-faint disabled:cursor-not-allowed"
               disabled={status === "submitting" || !email.trim()}
             >
               {status === "submitting"

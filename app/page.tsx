@@ -10,60 +10,25 @@ export default function Home() {
 
   return (
     <main className="bg-canvas text-ink min-h-screen overflow-x-hidden">
-      <div
-        className="mx-auto"
-        style={{
-          maxWidth: "1440px",
-          paddingInline: "clamp(20px, 5vw, 80px)",
-          paddingBlock: "clamp(28px, 4vw, 52px)",
-        }}
-      >
-        <SiteHeader
-          meta={
-            <>
-              SHOW NO. {latest.number}
-              <span className="text-rule mx-3" aria-hidden="true">
-                /
-              </span>
-              TRANSMITTING SINCE 2024
-              <span className="text-rule mx-3" aria-hidden="true">
-                /
-              </span>
-              EVERY OTHER MONDAY
-              <span className="text-rule mx-3" aria-hidden="true">
-                ·
-              </span>
-              <span className="text-accent">●</span> NEW EPISODE LIVE
-            </>
-          }
-        />
+      <div className="mx-auto max-w-[1440px] px-[clamp(20px,5vw,80px)] py-[clamp(28px,4vw,52px)]">
+        <SiteHeader />
 
         {/* Wordmark + tagline */}
-        <header style={{ marginBottom: "clamp(72px, 10vw, 148px)" }}>
-          <h1 className="t-wordmark">
-            <span style={{ display: "block" }}>SCIFI</span>
-            <span style={{ display: "block" }}>
-              HIG<span style={{ color: "var(--accent)" }}>H</span>FIVE
+        <header className="mb-[clamp(72px,10vw,148px)]">
+          <h1 className="font-display font-extrabold text-[clamp(64px,14vw,192px)] leading-[0.86] tracking-[-0.045em] break-words">
+            <span className="block">SCIFI</span>
+            <span className="block">
+              HIG<span className="text-accent">H</span>FIVE
             </span>
           </h1>
-          <div
-            className="grid"
-            style={{
-              gridTemplateColumns: "minmax(0, 1fr) minmax(0, 2fr)",
-              gap: "clamp(20px, 3vw, 48px)",
-              marginTop: "clamp(28px, 4vw, 52px)",
-            }}
-          >
+          <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-[clamp(20px,3vw,48px)] mt-[clamp(28px,4vw,52px)]">
             <div aria-hidden="true" />
             <div>
-              <p className="t-deck text-ink">
+              <p className="font-body italic font-normal text-[clamp(20px,2.2vw,28px)] leading-[1.4] text-ink">
                 A podcast about science fiction, weird tech, and the small parts
                 of the future that make us laugh.
               </p>
-              <p
-                className="t-byline text-ink-soft"
-                style={{ marginTop: "20px" }}
-              >
+              <p className="font-body italic font-normal text-[clamp(18px,1.7vw,22px)] leading-[1.45] text-ink-soft mt-5">
                 With Wren Halloway and Tomás Bui.
               </p>
             </div>
@@ -71,18 +36,14 @@ export default function Home() {
         </header>
 
         {/* Now playing ornament */}
-        <div
-          className="ornament"
-          style={{ marginBottom: "clamp(28px, 4vw, 52px)" }}
-        >
+        <div className="flex items-center gap-[0.9ch] text-ink-faint font-mono text-[13px] tracking-[0.3em] select-none mb-[clamp(28px,4vw,52px)] before:content-[''] before:flex-1 before:h-px before:bg-rule after:content-[''] after:flex-1 after:h-px after:bg-rule">
           NOW PLAYING
         </div>
 
         {/* Hero episode */}
         <article
           aria-labelledby="latest-title"
-          className="hero-grid"
-          style={{ marginBottom: "clamp(92px, 12vw, 148px)" }}
+          className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-[clamp(32px,5vw,80px)] items-start mb-[clamp(92px,12vw,148px)] max-[880px]:grid-cols-1 max-[880px]:gap-[clamp(28px,4vw,40px)]"
         >
           <EpisodeThumbnail
             videoId={latest.youtubeId}
@@ -91,39 +52,40 @@ export default function Home() {
             rotation={latest.thumbnail.rotation}
             size="hero"
             priority
+            className="max-[880px]:max-w-full"
           />
 
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "22px" }}
-          >
+          <div className="flex flex-col gap-[22px]">
             <span
-              className="t-episode-number text-ink-soft"
+              className="font-mono font-normal text-[clamp(56px,9vw,112px)] leading-[0.9] tracking-[-0.02em] text-ink-soft self-start"
               aria-hidden="true"
-              style={{ alignSelf: "start" }}
             >
               №<span className="text-accent">{latest.number}</span>
             </span>
 
-            <p className="t-meta text-ink-faint">
-              {latest.runtime} <span className="text-rule mx-2" aria-hidden="true">·</span>{" "}
+            <p className="font-mono text-base uppercase tracking-[0.06em] leading-[1.4] text-ink-faint">
+              {latest.runtime}
+              <span className="text-rule mx-2" aria-hidden="true">·</span>
               {latest.date}
             </p>
 
-            <h2 id="latest-title" className="t-display-tight text-ink">
+            <h2
+              id="latest-title"
+              className="font-display font-bold text-[clamp(40px,6vw,88px)] leading-[0.96] tracking-[-0.028em] text-balance text-ink"
+            >
               <Link
                 href={`/episodes/${latest.number}`}
-                className="title-link"
+                className="text-inherit no-underline bg-no-repeat bg-left-bottom bg-[length:0%_1px] [background-image:linear-gradient(var(--accent),var(--accent))] transition-[background-size] duration-300 ease-[var(--ease-out-quart)] hover:bg-[length:100%_1px] focus-visible:bg-[length:100%_2px] focus-visible:outline-none"
               >
                 {latest.title}
               </Link>
             </h2>
 
-            <p className="t-headline text-ink-soft">{latest.hosts}</p>
+            <p className="font-body italic font-semibold text-[clamp(28px,3.4vw,44px)] leading-[1.18] tracking-[-0.008em] text-ink-soft">
+              {latest.hosts}
+            </p>
 
-            <p
-              className="t-body text-ink-soft"
-              style={{ maxWidth: "62ch" }}
-            >
+            <p className="font-body font-normal text-[19px] leading-[1.6] text-ink-soft max-w-[62ch]">
               {latest.blurb}
             </p>
 
@@ -138,77 +100,63 @@ export default function Home() {
         {/* Prior transmissions */}
         <section
           aria-labelledby="prior-heading"
-          style={{ marginBottom: "clamp(72px, 10vw, 148px)" }}
+          className="mb-[clamp(72px,10vw,148px)]"
         >
-          <div
-            className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3"
-            style={{ marginBottom: "clamp(28px, 4vw, 52px)" }}
-          >
-            <h3 id="prior-heading" className="t-section text-ink">
-              Prior transmissions<span className="t-section-period">.</span>
+          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3 mb-[clamp(28px,4vw,52px)]">
+            <h3
+              id="prior-heading"
+              className="font-display font-bold text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-[-0.022em] text-balance text-ink"
+            >
+              Prior transmissions<span className="text-accent">.</span>
             </h3>
             <a
               href="#"
-              className="t-link-italic"
+              className="font-body italic font-medium text-[17px] leading-[1.4] text-ink underline decoration-accent decoration-1 underline-offset-4 [text-decoration-skip-ink:none] inline-block px-1 py-2 -mx-1 -my-2 transition-[text-decoration-thickness] duration-200 ease-[var(--ease-out-quart)] hover:decoration-[3px]"
               aria-label="Browse all 47 episodes in the archive"
             >
               all 47 episodes →
             </a>
           </div>
 
-          <ol style={{ listStyle: "none", margin: 0, padding: 0 }}>
+          <ol className="list-none m-0 p-0">
             {recent.map((ep) => {
               return (
-                <li key={ep.number} className="recent-episode recent-episode--with-thumb">
+                <li
+                  key={ep.number}
+                  className="grid grid-cols-[minmax(240px,320px)_1fr_auto] gap-x-[clamp(20px,3vw,48px)] items-start py-[clamp(28px,4vw,52px)] border-t border-rule last:border-b max-[720px]:grid-cols-[1fr_auto] max-[720px]:[grid-template-areas:'thumb_thumb'_'content_play'] max-[720px]:gap-y-[clamp(18px,3vw,28px)]"
+                >
                   <EpisodeThumbnail
                     videoId={ep.youtubeId}
                     alt=""
                     flavor={ep.thumbnail.flavor}
                     rotation={ep.thumbnail.rotation}
                     size="small"
+                    className="max-[720px]:[grid-area:thumb] max-[720px]:max-w-full"
                   />
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "10px",
-                      minWidth: 0,
-                    }}
-                  >
-                    <h4
-                      className="t-headline text-ink"
-                      style={{ fontSize: "clamp(22px, 2.6vw, 32px)" }}
-                    >
+                  <div className="flex flex-col gap-2.5 min-w-0 max-[720px]:[grid-area:content]">
+                    <h4 className="font-body italic font-semibold text-[clamp(22px,2.6vw,32px)] leading-[1.18] tracking-[-0.008em] text-ink">
                       <span
-                        className="t-episode-number-inline text-ink-faint"
+                        className="font-mono font-normal not-italic tracking-[-0.01em] mr-[0.5ch] text-ink-faint"
                         aria-hidden="true"
                       >
                         №{ep.number}
                       </span>
                       <Link
                         href={`/episodes/${ep.number}`}
-                        className="title-link"
+                        className="text-inherit no-underline bg-no-repeat bg-left-bottom bg-[length:0%_1px] [background-image:linear-gradient(var(--accent),var(--accent))] transition-[background-size] duration-300 ease-[var(--ease-out-quart)] hover:bg-[length:100%_1px] focus-visible:bg-[length:100%_2px] focus-visible:outline-none"
                       >
                         {ep.title}
                       </Link>
                     </h4>
-                    <p
-                      className="t-body-small text-ink-soft"
-                      style={{ maxWidth: "58ch" }}
-                    >
+                    <p className="font-body font-normal text-base leading-[1.6] text-ink-soft max-w-[58ch]">
                       {ep.blurb}
                     </p>
-                    <p className="t-byline text-ink-soft">
+                    <p className="font-body italic font-normal text-[clamp(18px,1.7vw,22px)] leading-[1.45] text-ink-soft">
                       {ep.hosts}.
                     </p>
-                    <p
-                      className="t-meta text-ink-faint"
-                      style={{ marginTop: "2px" }}
-                    >
-                      {ep.runtime}{" "}
-                      <span className="text-rule mx-2" aria-hidden="true">
-                        ·
-                      </span>{" "}
+                    <p className="font-mono text-base uppercase tracking-[0.06em] leading-[1.4] text-ink-faint mt-0.5">
+                      {ep.runtime}
+                      <span className="text-rule mx-2" aria-hidden="true">·</span>
                       {ep.date}
                     </p>
                   </div>
@@ -218,6 +166,7 @@ export default function Home() {
                     title={ep.title}
                     size="small"
                     flavor={ep.thumbnail.flavor}
+                    className="max-[720px]:[grid-area:play]"
                   />
                 </li>
               );
