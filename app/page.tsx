@@ -1,65 +1,232 @@
-import Image from "next/image";
+import Link from "next/link";
+import { HeroPlay, PlayButton } from "./components/play-button";
+import { EpisodeThumbnail } from "./components/episode-thumbnail";
+import { SiteHeader } from "./components/site-header";
+import { SiteFooter } from "./components/site-footer";
+import { episodes } from "./episodes";
 
 export default function Home() {
+  const [latest, ...recent] = episodes;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="bg-canvas text-ink min-h-screen overflow-x-hidden">
+      <div
+        className="mx-auto"
+        style={{
+          maxWidth: "1440px",
+          paddingInline: "clamp(20px, 5vw, 80px)",
+          paddingBlock: "clamp(28px, 4vw, 52px)",
+        }}
+      >
+        <SiteHeader
+          meta={
+            <>
+              SHOW NO. {latest.number}
+              <span className="text-rule mx-3" aria-hidden="true">
+                /
+              </span>
+              TRANSMITTING SINCE 2024
+              <span className="text-rule mx-3" aria-hidden="true">
+                /
+              </span>
+              EVERY OTHER MONDAY
+              <span className="text-rule mx-3" aria-hidden="true">
+                ·
+              </span>
+              <span className="text-accent">●</span> NEW EPISODE LIVE
+            </>
+          }
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+
+        {/* Wordmark + tagline */}
+        <header style={{ marginBottom: "clamp(72px, 10vw, 148px)" }}>
+          <h1 className="t-wordmark">
+            <span style={{ display: "block" }}>SCIFI</span>
+            <span style={{ display: "block" }}>
+              HIG<span style={{ color: "var(--accent)" }}>H</span>FIVE
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
+            className="grid"
+            style={{
+              gridTemplateColumns: "minmax(0, 1fr) minmax(0, 2fr)",
+              gap: "clamp(20px, 3vw, 48px)",
+              marginTop: "clamp(28px, 4vw, 52px)",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <div aria-hidden="true" />
+            <div>
+              <p className="t-deck text-ink">
+                A podcast about science fiction, weird tech, and the small parts
+                of the future that make us laugh.
+              </p>
+              <p
+                className="t-byline text-ink-soft"
+                style={{ marginTop: "20px" }}
+              >
+                With Wren Halloway and Tomás Bui.
+              </p>
+            </div>
+          </div>
+        </header>
+
+        {/* Now playing ornament */}
+        <div
+          className="ornament"
+          style={{ marginBottom: "clamp(28px, 4vw, 52px)" }}
+        >
+          NOW PLAYING
+        </div>
+
+        {/* Hero episode */}
+        <article
+          aria-labelledby="latest-title"
+          className="hero-grid"
+          style={{ marginBottom: "clamp(92px, 12vw, 148px)" }}
+        >
+          <EpisodeThumbnail
+            videoId={latest.youtubeId}
+            alt=""
+            flavor={latest.thumbnail.flavor}
+            rotation={latest.thumbnail.rotation}
+            size="hero"
+            priority
+          />
+
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "22px" }}
+          >
+            <span
+              className="t-episode-number text-ink-soft"
+              aria-hidden="true"
+              style={{ alignSelf: "start" }}
+            >
+              №<span className="text-accent">{latest.number}</span>
+            </span>
+
+            <p className="t-meta text-ink-faint">
+              {latest.runtime} <span className="text-rule mx-2" aria-hidden="true">·</span>{" "}
+              {latest.date}
+            </p>
+
+            <h2 id="latest-title" className="t-display-tight text-ink">
+              <Link
+                href={`/episodes/${latest.number}`}
+                className="title-link"
+              >
+                {latest.title}
+              </Link>
+            </h2>
+
+            <p className="t-headline text-ink-soft">{latest.hosts}</p>
+
+            <p
+              className="t-body text-ink-soft"
+              style={{ maxWidth: "62ch" }}
+            >
+              {latest.blurb}
+            </p>
+
+            <HeroPlay
+              episodeNumber={latest.number}
+              title={latest.title}
+              showNotesHref={`/episodes/${latest.number}`}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+        </article>
+
+        {/* Prior transmissions */}
+        <section
+          aria-labelledby="prior-heading"
+          style={{ marginBottom: "clamp(72px, 10vw, 148px)" }}
+        >
+          <div
+            className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3"
+            style={{ marginBottom: "clamp(28px, 4vw, 52px)" }}
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <h3 id="prior-heading" className="t-section text-ink">
+              Prior transmissions<span className="t-section-period">.</span>
+            </h3>
+            <a
+              href="#"
+              className="t-link-italic"
+              aria-label="Browse all 47 episodes in the archive"
+            >
+              all 47 episodes →
+            </a>
+          </div>
+
+          <ol style={{ listStyle: "none", margin: 0, padding: 0 }}>
+            {recent.map((ep) => {
+              return (
+                <li key={ep.number} className="recent-episode recent-episode--with-thumb">
+                  <EpisodeThumbnail
+                    videoId={ep.youtubeId}
+                    alt=""
+                    flavor={ep.thumbnail.flavor}
+                    rotation={ep.thumbnail.rotation}
+                    size="small"
+                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                      minWidth: 0,
+                    }}
+                  >
+                    <h4
+                      className="t-headline text-ink"
+                      style={{ fontSize: "clamp(22px, 2.6vw, 32px)" }}
+                    >
+                      <span
+                        className="t-episode-number-inline text-ink-faint"
+                        aria-hidden="true"
+                      >
+                        №{ep.number}
+                      </span>
+                      <Link
+                        href={`/episodes/${ep.number}`}
+                        className="title-link"
+                      >
+                        {ep.title}
+                      </Link>
+                    </h4>
+                    <p
+                      className="t-body-small text-ink-soft"
+                      style={{ maxWidth: "58ch" }}
+                    >
+                      {ep.blurb}
+                    </p>
+                    <p className="t-byline text-ink-soft">
+                      {ep.hosts}.
+                    </p>
+                    <p
+                      className="t-meta text-ink-faint"
+                      style={{ marginTop: "2px" }}
+                    >
+                      {ep.runtime}{" "}
+                      <span className="text-rule mx-2" aria-hidden="true">
+                        ·
+                      </span>{" "}
+                      {ep.date}
+                    </p>
+                  </div>
+
+                  <PlayButton
+                    episodeNumber={ep.number}
+                    title={ep.title}
+                    size="small"
+                    flavor={ep.thumbnail.flavor}
+                  />
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+
+        <SiteFooter />
+      </div>
+    </main>
   );
 }
