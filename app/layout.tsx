@@ -25,7 +25,7 @@ const mono = Share_Tech_Mono({
 export const metadata: Metadata = {
   title: "SCIFIHIGHFIVE — science fiction, weird tech, and the future seen sideways",
   description:
-    "A podcast and newsletter from Wren Halloway and Tomás Bui. Science fiction, weird tech, and the small parts of the future that make us laugh.",
+    "A podcast and newsletter from Caitlin Jacobs and Rob Skidmore. Science fiction, weird tech, and the small parts of the future that make us laugh.",
 };
 
 export default function RootLayout({

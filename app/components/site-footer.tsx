@@ -54,11 +54,7 @@ export function SiteFooter() {
           <span className="text-rule mx-2" aria-hidden="true">
             ·
           </span>{" "}
-          2026{" "}
-          <span className="text-rule mx-2" aria-hidden="true">
-            ·
-          </span>{" "}
-          ALL TRANSMISSIONS WELCOME
+          2026
         </p>
         <nav
           aria-label="Site"
@@ -73,10 +69,13 @@ export function SiteFooter() {
           <a href="mailto:hi@scifihighfive.com" className={navLinkClass}>
             Contact
           </a>
-          <a href="#" className={navLinkClass}>
+          <a
+            href="https://instagram.com/scifihighfive"
+            className={navLinkClass}
+          >
             Instagram
           </a>
-          <a href="#" className={navLinkClass}>
+          <a href="https://www.youtube.com/@SciFi-HighFive" className={navLinkClass}>
             YouTube
           </a>
         </nav>

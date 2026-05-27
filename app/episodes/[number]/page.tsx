@@ -70,20 +70,29 @@ function ReferenceItem({ item }: { item: Reference }) {
 
   const body = (
     <>
-      <span className={kindClass}>{kindLabel[item.kind]}</span>
+      <span className={`${kindClass} shrink-0 w-[clamp(60px,8vw,84px)]`}>
+        {kindLabel[item.kind]}
+      </span>
       <span
-        className={`${titleClass} ${item.href ? "group-hover:underline group-hover:decoration-accent group-hover:decoration-2 group-hover:underline-offset-4 group-focus-visible:underline group-focus-visible:decoration-accent group-focus-visible:decoration-2 group-focus-visible:underline-offset-4" : ""}`}
+        className={`${titleClass} truncate min-w-0 ${item.href ? "group-hover:underline group-hover:decoration-accent group-hover:decoration-2 group-hover:underline-offset-4 group-focus-visible:underline group-focus-visible:decoration-accent group-focus-visible:decoration-2 group-focus-visible:underline-offset-4" : ""}`}
       >
         {item.title}
       </span>
-      {item.by && <span className={byClass}> {item.by}</span>}
-      {item.year && <span className={yearClass}> · {item.year}</span>}
+      {item.by && (
+        <span className={`${byClass} truncate min-w-0`}> {item.by}</span>
+      )}
+      {item.year && (
+        <span className={`${yearClass} shrink-0`}> · {item.year}</span>
+      )}
     </>
   );
   return (
-    <li className="py-[clamp(12px,1.6vw,16px)] border-t border-dashed border-rule grid grid-cols-[minmax(60px,84px)_minmax(0,1fr)] gap-x-[clamp(14px,2vw,24px)] items-baseline last:border-b">
+    <li className="py-[clamp(12px,1.6vw,16px)] border-t border-dashed border-rule flex items-baseline gap-x-[clamp(14px,2vw,24px)] last:border-b whitespace-nowrap">
       {item.href ? (
-        <a href={item.href} className="text-inherit no-underline contents group">
+        <a
+          href={item.href}
+          className="text-inherit no-underline contents group"
+        >
           {body}
         </a>
       ) : (
@@ -135,7 +144,10 @@ export default async function EpisodePage({
               className="font-mono font-normal text-[clamp(40px,5.2vw,68px)] leading-none tracking-[-0.02em] text-ink-soft"
               aria-hidden="true"
             >
-              №<span className="text-accent">{ep.number}</span>
+              №
+              <span style={{ color: flavorVar[ep.thumbnail.flavor] }}>
+                {ep.number}
+              </span>
             </span>
             <p className="font-mono text-base uppercase tracking-[0.06em] leading-[1.4] text-ink-faint">
               TRANSMITTING
@@ -194,7 +206,7 @@ export default async function EpisodePage({
             {setup.map((para, i) => (
               <p
                 key={i}
-                className={`font-body font-normal text-[19px] leading-[1.6] max-w-[68ch] text-ink ${i === 0 ? "first-letter:font-body first-letter:font-bold first-letter:not-italic first-letter:text-[5.2em] first-letter:leading-[0.86] first-letter:float-left first-letter:pr-[14px] first-letter:pt-[6px] first-letter:mt-[6px] first-letter:text-accent" : ""}`}
+                className="font-body font-normal text-[19px] leading-[1.6] max-w-[68ch] text-ink"
               >
                 {para}
               </p>

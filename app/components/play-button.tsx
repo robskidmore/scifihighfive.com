@@ -68,6 +68,7 @@ type HeroPlayProps = {
   title: string;
   showNotesHref?: string;
   variant?: "home" | "detail";
+  flavor?: ThumbnailFlavor;
 };
 
 export function HeroPlay({
@@ -75,6 +76,7 @@ export function HeroPlay({
   title,
   showNotesHref,
   variant = "home",
+  flavor,
 }: HeroPlayProps) {
   const [acknowledged, setAcknowledged] = useState(false);
 
@@ -82,7 +84,7 @@ export function HeroPlay({
     <div className="flex flex-wrap items-center gap-6 mt-4">
       <button
         type="button"
-        className={`${playButtonBase} w-[92px] h-[92px]`}
+        className={`${playButtonBase} w-[92px] h-[92px] ${acknowledged ? "" : "signal-pulse"}`}
         aria-label={
           acknowledged
             ? `Playback for episode ${episodeNumber} arrives next week`
@@ -90,6 +92,7 @@ export function HeroPlay({
         }
         aria-pressed={acknowledged}
         onClick={() => setAcknowledged(true)}
+        style={flavor ? { background: flavorColor[flavor] } : undefined}
       >
         <span
           className="w-0 h-0 border-y-[14px] border-l-[22px] border-r-0 border-solid border-y-transparent border-l-canvas ml-1.5"

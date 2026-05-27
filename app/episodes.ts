@@ -62,7 +62,7 @@ export const episodes: Episode[] = [
       "Stanisław Lem's Solaris turns 65. We argue about what counts as alien when the alien is also embarrassingly literary, and what a planet that thinks back actually wants from us.",
     youtubeId: PLACEHOLDER_VIDEO,
     thumbnail: {
-      flavor: "peach",
+      flavor: "sky",
       rotation: -0.3,
     },
     setup: [
@@ -152,7 +152,7 @@ export const episodes: Episode[] = [
       "The new Apple AR field notes against a stack of Bruce Sterling essays from 1998. Three takes on whether 'ambient computing' is finally here, or finally over.",
     youtubeId: PLACEHOLDER_VIDEO,
     thumbnail: {
-      flavor: "sky",
+      flavor: "peach",
       rotation: -0.6,
     },
     setup: [
@@ -261,7 +261,7 @@ export const episodes: Episode[] = [
       "Why analog returns in genre fiction every decade. The Mountain in the Sea, Annihilation, and the romance of objects you can put back in their box.",
     youtubeId: PLACEHOLDER_VIDEO,
     thumbnail: {
-      flavor: "peach",
+      flavor: "sky",
       rotation: 0.6,
     },
   },

@@ -61,7 +61,7 @@ export default function EpisodesPage() {
             {episodes.map((ep) => (
               <li
                 key={ep.number}
-                className="grid grid-cols-[minmax(240px,320px)_1fr_auto] gap-x-[clamp(20px,3vw,48px)] items-start py-[clamp(28px,4vw,52px)] border-t border-rule last:border-b max-[720px]:grid-cols-[1fr_auto] max-[720px]:[grid-template-areas:'thumb_thumb'_'content_play'] max-[720px]:gap-y-[clamp(18px,3vw,28px)]"
+                className="grid grid-cols-[minmax(240px,320px)_1fr_auto] gap-x-[clamp(20px,3vw,48px)] items-start py-[clamp(28px,4vw,52px)] border-t border-rule first:border-t-0 max-[720px]:grid-cols-[1fr_auto] max-[720px]:[grid-template-areas:'thumb_thumb'_'content_play'] max-[720px]:gap-y-[clamp(18px,3vw,28px)]"
               >
                 <EpisodeThumbnail
                   videoId={ep.youtubeId}

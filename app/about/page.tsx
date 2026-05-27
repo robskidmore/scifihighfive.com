@@ -7,7 +7,7 @@ import { SiteFooter } from "../components/site-footer";
 export const metadata: Metadata = {
   title: "About the show · SCIFIHIGHFIVE",
   description:
-    "Two hosts, every other Monday. A podcast about science fiction without solemnity. Meet Wren Halloway and Tomás Bui.",
+    "Two hosts, every other Monday. A podcast about science fiction without solemnity. Meet Caitlin Jacobs and Rob Skidmore.",
 };
 
 type Social = { label: string; href: string };
@@ -22,6 +22,10 @@ type Host = {
   tag: string;
   bio: string[];
   socials: Social[];
+  // CSS object-position for the portrait. Accepts any valid value:
+  // keywords ("top", "center", "bottom left") or percentages ("center 20%").
+  // Defaults to "center" when omitted.
+  imagePosition?: string;
 };
 
 const flavorBg: Record<Host["flavor"], string> = {
@@ -41,43 +45,47 @@ const flavorTag: Record<Host["flavor"], string> = {
 // TODO: replace placeholder bios + social URLs with real host content.
 const hosts: Host[] = [
   {
-    name: "Wren Halloway",
+    name: "Caitlin Jacobs",
     role: "Co-host · Resident over-explainer",
     flavor: "sky",
     rotation: -1.2,
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&q=80&auto=format&fit=crop",
+    image: "/caitlin-jacobs.jpg",
     alt: "Wren Halloway, laughing, in a grey beanie and denim jacket against a teal wall.",
     tag: "Reads everything",
     bio: [
-      "Wren writes the newsletter, takes the notes nobody asks for, and re-reads The Dispossessed every January like it’s a chore she enjoys.",
-      "Came to the show by way of a college radio station and a brief, glorious stint shelving books at a science library nobody visited. The tangents are mostly her fault.",
+      "Caitlin Jacobs writes science fiction and fantasy. Her stories have been enjoyed by thousands of children from her time as the lead writer for a program that teaches kids to read, and she was the 2019 scholarship recipient for the Writing Excuses retreat. She lives in Texas with her husband and three young boys, and will do basically anything for a bowl of ice cream.",
     ],
     socials: [
-      { label: "BLUESKY", href: "#" },
-      { label: "ARE.NA", href: "#" },
-      { label: "GOODREADS", href: "#" },
-      { label: "EMAIL", href: "mailto:wren@scifihighfive.com" },
+      {
+        label: "INSTAGRAM",
+        href: "https://www.instagram.com/iamcaitlinjacobs/",
+      },
+      { label: "WEBSITE", href: "https://authorcaitlinjacobs.com/" },
+      // { label: "ARE.NA", href: "#" },
+      // { label: "GOODREADS", href: "#" },
+      // { label: "EMAIL", href: "mailto:wren@scifihighfive.com" },
     ],
   },
   {
-    name: "Tomás Bui",
+    name: "Rob Skidmore",
     role: "Co-host · First-cut editor",
     flavor: "peach",
     rotation: 1.0,
-    image:
-      "https://images.unsplash.com/photo-1521119989659-a83eee488004?w=900&q=80&auto=format&fit=crop",
+    image: "/rob-skidmore.jpg",
     alt: "Tomás Bui in an orange beanie and black turtleneck, arms crossed, looking off-camera on an overcast rooftop.",
     tag: "Watches everything",
+    imagePosition: "center top",
     bio: [
-      "Tomás handles the cuts, the chapter marks, and most of the on-air pitches you can summarize in thirty seconds.",
-      "Grew up on rented VHS sci-fi and a brother’s secondhand copy of Snow Crash. Treats every episode like he’s about to film a small documentary, then pretends he didn’t.",
+      "Rob Skidmore writes science fiction stories about being human. Raised in rural Western New York, he now lives with his beautiful wife in Utah. They have four kids whose initials spell HOME. By day he's a software engineer. By night he's exhausted. Every door in their basement is painted with a Disney-themed mural. His claim to fame is that he was an All-American and the 2004 New York state champion in the 400m hurdles in high school.",
     ],
     socials: [
-      { label: "INSTAGRAM", href: "#" },
-      { label: "LETTERBOXD", href: "#" },
-      { label: "MASTODON", href: "#" },
-      { label: "EMAIL", href: "mailto:tomas@scifihighfive.com" },
+      {
+        label: "INSTAGRAM",
+        href: "https://www.instagram.com/robertaskidmore/",
+      },
+      { label: "WEBSITE", href: "https://robertaskidmore.com/" },
+      // { label: "MASTODON", href: "#" },
+      // { label: "EMAIL", href: "mailto:tomas@scifihighfive.com" },
     ],
   },
 ];
@@ -116,18 +124,18 @@ export default function AboutPage() {
               The show
             </h2>
 
-            <p className="first-letter:font-body first-letter:font-bold first-letter:not-italic first-letter:text-[5.2em] first-letter:leading-[0.86] first-letter:float-left first-letter:pr-[14px] first-letter:pt-[6px] first-letter:mt-[6px] first-letter:text-accent">
+            <p>
               scifihighfive started in a kitchen in 2024 because the two of us
-              kept texting each other about the same essays, the same
-              paperback finds, and the same questions a robot vacuum could not
-              answer. We decided we should probably just record it.
+              kept texting each other about the same essays, the same paperback
+              finds, and the same questions a robot vacuum could not answer. We
+              decided we should probably just record it.
             </p>
 
             <p>
-              Every other Monday we pick something. A book, a film, a piece
-              of weird research, a rumor we cannot let go of. Then we try to
-              figure out what it’s actually doing. Some episodes we agree by
-              the end. More often we don’t. The disagreement is the show.
+              Every other Monday we pick something. A book, a film, a piece of
+              weird research, a rumor we cannot let go of. Then we try to figure
+              out what it’s actually doing. Some episodes we agree by the end.
+              More often we don’t. The disagreement is the show.
             </p>
 
             <aside
@@ -145,10 +153,10 @@ export default function AboutPage() {
 
             <p>
               The hour has notes, transcripts, occasional pull quotes when we
-              accidentally say something smart, and a newsletter for the
-              threads that didn’t fit the recording. No solemnity, no host
-              voice school, no thirty-second sponsor read about a mattress.
-              Just two people who like each other arguing about Le Guin.
+              accidentally say something smart, and a newsletter for the threads
+              that didn’t fit the recording. No solemnity, no host voice school,
+              no thirty-second sponsor read about a mattress. Just two people
+              who like each other arguing about Le Guin.
             </p>
 
             <p>
@@ -179,7 +187,9 @@ export default function AboutPage() {
                 className="grid grid-cols-1 gap-[clamp(20px,2.6vw,32px)] min-w-0"
               >
                 <figure
-                  className={`host-portrait w-full aspect-[4/5] ${flavorBg[host.flavor]} max-[880px]:max-w-[480px] m-0`}
+                  className={`host-portrait w-full aspect-[4/5] ${
+                    flavorBg[host.flavor]
+                  } max-[880px]:max-w-[480px] m-0`}
                   style={
                     {
                       ["--host-rotate" as string]: `${host.rotation}deg`,
@@ -192,9 +202,12 @@ export default function AboutPage() {
                     fill
                     sizes="(max-width: 880px) 100vw, (max-width: 1200px) 50vw, 560px"
                     className="object-cover"
+                    style={{ objectPosition: host.imagePosition ?? "center" }}
                   />
                   <figcaption
-                    className={`absolute z-[2] bottom-[clamp(12px,1.6vw,18px)] left-[clamp(12px,1.6vw,18px)] font-mono text-[11px] tracking-[0.22em] uppercase text-canvas ${flavorTag[host.flavor]} px-2.5 pt-1.5 pb-[7px]`}
+                    className={`absolute z-[2] bottom-[clamp(12px,1.6vw,18px)] left-[clamp(12px,1.6vw,18px)] font-mono text-[11px] tracking-[0.22em] uppercase text-canvas ${
+                      flavorTag[host.flavor]
+                    } px-2.5 pt-1.5 pb-[7px]`}
                     aria-hidden="true"
                   >
                     {host.tag}
@@ -267,7 +280,9 @@ export default function AboutPage() {
             >
               hi@scifihighfive.com
             </a>
-            <span className="text-rule" aria-hidden="true">·</span>
+            <span className="text-rule" aria-hidden="true">
+              ·
+            </span>
             <Link
               href="/"
               className="font-body font-medium italic text-[clamp(19px,1.7vw,22px)] text-ink underline decoration-accent decoration-1 underline-offset-[5px] [text-decoration-skip-ink:none] inline-block px-1 py-2 -mx-1 -my-2 transition-[text-decoration-thickness] duration-200 ease-[var(--ease-out-quart)] hover:decoration-[3px]"

@@ -1,9 +1,19 @@
 import Link from "next/link";
 import { HeroPlay, PlayButton } from "./components/play-button";
-import { EpisodeThumbnail } from "./components/episode-thumbnail";
+import {
+  EpisodeThumbnail,
+  type ThumbnailFlavor,
+} from "./components/episode-thumbnail";
 import { SiteHeader } from "./components/site-header";
 import { SiteFooter } from "./components/site-footer";
 import { episodes } from "./episodes";
+
+const flavorVar: Record<ThumbnailFlavor, string> = {
+  peach: "var(--accent)",
+  sage: "var(--flavor-sage)",
+  sky: "var(--flavor-sky)",
+  lavender: "var(--flavor-lavender)",
+};
 
 export default function Home() {
   const [latest, ...recent] = episodes;
@@ -29,7 +39,7 @@ export default function Home() {
                 of the future that make us laugh.
               </p>
               <p className="font-body italic font-normal text-[clamp(18px,1.7vw,22px)] leading-[1.45] text-ink-soft mt-5">
-                With Wren Halloway and Tomás Bui.
+                With Caitlin Jacobs & Rob Skidmore.
               </p>
             </div>
           </div>
@@ -37,7 +47,10 @@ export default function Home() {
 
         {/* Now playing ornament */}
         <div className="flex items-center gap-[0.9ch] text-ink-faint font-mono text-[13px] tracking-[0.3em] select-none mb-[clamp(28px,4vw,52px)] before:content-[''] before:flex-1 before:h-px before:bg-rule after:content-[''] after:flex-1 after:h-px after:bg-rule">
-          NOW PLAYING
+          <span className="inline-flex items-baseline">
+            NOW PLAYING
+            <span aria-hidden="true" className="signal-cursor" />
+          </span>
         </div>
 
         {/* Hero episode */}
@@ -60,7 +73,10 @@ export default function Home() {
               className="font-mono font-normal text-[clamp(56px,9vw,112px)] leading-[0.9] tracking-[-0.02em] text-ink-soft self-start"
               aria-hidden="true"
             >
-              №<span className="text-accent">{latest.number}</span>
+              №
+              <span style={{ color: flavorVar[latest.thumbnail.flavor] }}>
+                {latest.number}
+              </span>
             </span>
 
             <p className="font-mono text-base uppercase tracking-[0.06em] leading-[1.4] text-ink-faint">
@@ -93,6 +109,7 @@ export default function Home() {
               episodeNumber={latest.number}
               title={latest.title}
               showNotesHref={`/episodes/${latest.number}`}
+              flavor={latest.thumbnail.flavor}
             />
           </div>
         </article>
@@ -123,7 +140,7 @@ export default function Home() {
               return (
                 <li
                   key={ep.number}
-                  className="grid grid-cols-[minmax(240px,320px)_1fr_auto] gap-x-[clamp(20px,3vw,48px)] items-start py-[clamp(28px,4vw,52px)] border-t border-rule last:border-b max-[720px]:grid-cols-[1fr_auto] max-[720px]:[grid-template-areas:'thumb_thumb'_'content_play'] max-[720px]:gap-y-[clamp(18px,3vw,28px)]"
+                  className="grid grid-cols-[minmax(240px,320px)_1fr_auto] gap-x-[clamp(20px,3vw,48px)] items-start py-[clamp(28px,4vw,52px)] border-t border-rule first:border-t-0 max-[720px]:grid-cols-[1fr_auto] max-[720px]:[grid-template-areas:'thumb_thumb'_'content_play'] max-[720px]:gap-y-[clamp(18px,3vw,28px)]"
                 >
                   <EpisodeThumbnail
                     videoId={ep.youtubeId}

@@ -155,6 +155,33 @@ body {
 
 .ep-video-frame .yt-lite > .lty-playbtn { z-index: 2; }
 
+/* Transmission cursor: a small accent block that blinks like a CRT caret.
+   Used sparingly as the page's single "we're live" mark. */
+.signal-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.95em;
+  background: var(--accent);
+  margin-inline-start: 0.45ch;
+  vertical-align: -0.06em;
+  animation: signal-cursor 1.1s linear infinite;
+}
+
+@keyframes signal-cursor {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Paused-state heartbeat for the hero play indicator. Stops when engaged. */
+.signal-pulse {
+  animation: signal-pulse 1.4s var(--ease-out-quart) infinite;
+}
+
+@keyframes signal-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
 /* Decorative paper border: four 1px gradient lines inset from the corners.
    Used by the zine and the field-note dispatch. Inset via --paper-gap. */
 .paper-border {
@@ -197,5 +224,11 @@ body {
 
   .host-portrait:hover {
     transform: rotate(var(--host-rotate, -0.6deg));
+  }
+
+  .signal-cursor,
+  .signal-pulse {
+    animation: none;
+    opacity: 1;
   }
 }

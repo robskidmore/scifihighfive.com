@@ -70,7 +70,7 @@ export default function NotFound() {
               <footer className="flex items-center gap-3 mt-[clamp(2px,0.6vw,8px)]">
                 <span className="flex-1 h-px bg-rule" aria-hidden="true" />
                 <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink-soft whitespace-nowrap">
-                  / Wren / Tomás
+                  Caitlin & Rob
                 </span>
               </footer>
             </article>
